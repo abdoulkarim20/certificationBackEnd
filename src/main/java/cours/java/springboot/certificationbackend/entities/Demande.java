@@ -19,6 +19,7 @@ public class Demande {
     private String objet;
     private TextArea contenu;
     private Date dateDemande;
+    @Enumerated(EnumType.STRING)
     private Statut statutDemande;
     @ManyToOne
     private Etudiant etudiant;

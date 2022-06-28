@@ -16,7 +16,7 @@ public class CertificationbackendApplication {
     public static void main(String[] args) {
         SpringApplication.run(CertificationbackendApplication.class, args);
     }
-    @Bean
+    //@Bean
     CommandLineRunner commandLineRunner(AdminRepositorie patientRepository){
         return args -> {
             for (int i=0;i<=14;i++){
