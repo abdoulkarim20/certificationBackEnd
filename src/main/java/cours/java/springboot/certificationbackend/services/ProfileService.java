@@ -74,7 +74,9 @@ public class ProfileService implements IProfilService {
     @Override
     public Profile searcheProfileByeLibelle(String libelle) throws ProfileNotFoundException {
         Profile profile=profileRepositorie.getProfileByLibelleContains(libelle);
-        if (profile==null) throw new ProfileNotFoundException("Profile inexistant");
-        return profile;
+        if (profile==null){ throw new ProfileNotFoundException("Profile inexistant");
+        }else {
+            return profile;
+        }
     }
 }
