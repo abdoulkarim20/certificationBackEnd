@@ -41,6 +41,7 @@ public class ProfileService implements IProfilService {
         log.info("Enregistreemnt d'un profile");
         //Je transforme dabord l'entite dto en entite
         Profile profile=profileMapper.fromProfileDTO(profileDTO);
+        getProfileByLibelle(profile.getLibelle());
         Profile profileSaved=profileRepositorie.save(profile);
         return profileMapper.fromProfile(profileSaved);
 //        getProfileByLibelle(profile.getLibelle());
@@ -70,7 +71,6 @@ public class ProfileService implements IProfilService {
     public ProfileDTO getOneProfile(Long id) throws ProfileNotFoundException {
         Profile profile=profileRepositorie.findById(id)
                 .orElseThrow(()->new ProfileNotFoundException("Le profile avec cet id n'existe pas"));
-
         return profileMapper.fromProfile(profile);
     }
 
