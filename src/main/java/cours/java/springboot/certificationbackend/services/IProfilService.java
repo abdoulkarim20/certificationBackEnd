@@ -8,10 +8,10 @@ import java.util.List;
 
 public interface IProfilService {
     void getProfileByLibelle(String libelle) throws ProfileNotFoundException;
-    Profile saveProfile(Profile profile) throws ProfileNotFoundException;
+    ProfileDTO saveProfile(ProfileDTO profileDTO) throws ProfileNotFoundException;
     List<ProfileDTO>profileDtoList();
-    Profile getOneProfile(Long id) throws ProfileNotFoundException;
-    Profile updateProfile(Long id,Profile profile) throws ProfileNotFoundException;
-    Profile deleteProfile(Long id) throws ProfileNotFoundException;
+    ProfileDTO getOneProfile(Long id) throws ProfileNotFoundException;
+    ProfileDTO updateProfile(ProfileDTO profileDTO) throws ProfileNotFoundException;
+    void deleteProfile(Long id) throws ProfileNotFoundException;
     Profile searcheProfileByeLibelle(String libelle) throws ProfileNotFoundException;
 }
