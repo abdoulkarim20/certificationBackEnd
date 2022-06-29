@@ -1,7 +1,6 @@
 package cours.java.springboot.certificationbackend.services;
 
 import cours.java.springboot.certificationbackend.dtos.ProfileDTO;
-import cours.java.springboot.certificationbackend.entities.Profile;
 import cours.java.springboot.certificationbackend.exceptions.ProfileNotFoundException;
 
 import java.util.List;
