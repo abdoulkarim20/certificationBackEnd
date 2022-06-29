@@ -8,6 +8,9 @@ import cours.java.springboot.certificationbackend.repositories.DepartementReposi
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @Transactional
 public class DepartementService implements IDepartement {
@@ -17,6 +20,15 @@ public class DepartementService implements IDepartement {
     public DepartementService(MapperDTO mapperDTO, DepartementRepositorie departementRepositorie) {
         this.mapperDTO = mapperDTO;
         this.departementRepositorie = departementRepositorie;
+    }
+
+    @Override
+    public List<DepartementDTO> departementDtoList() {
+        List<Departement>departementList=departementRepositorie.findAll();
+        List<DepartementDTO>departementDTOS=departementList.stream()
+                .map(departement -> mapperDTO.fromDepartement(departement))
+                .collect(Collectors.toList());
+        return departementDTOS;
     }
 
     @Override

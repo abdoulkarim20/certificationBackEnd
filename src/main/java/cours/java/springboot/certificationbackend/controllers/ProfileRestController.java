@@ -1,14 +1,13 @@
 package cours.java.springboot.certificationbackend.controllers;
 
 import cours.java.springboot.certificationbackend.dtos.ProfileDTO;
-import cours.java.springboot.certificationbackend.entities.Profile;
 import cours.java.springboot.certificationbackend.exceptions.ProfileNotFoundException;
 import cours.java.springboot.certificationbackend.services.ProfileService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @Slf4j
