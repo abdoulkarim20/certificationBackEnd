@@ -51,4 +51,11 @@ public class DepartementService implements IDepartement {
         Departement departementSaved=departementRepositorie.save(departement);
         return mapperDTO.fromDepartement(departementSaved);
     }
+
+    @Override
+    public DepartementDTO updateDepartement(DepartementDTO departementDTO) {
+        Departement departement=mapperDTO.fromDepartementDTO(departementDTO);
+        Departement departementUpdated=departementRepositorie.save(departement);
+        return mapperDTO.fromDepartement(departementUpdated);
+    }
 }

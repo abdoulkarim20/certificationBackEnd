@@ -10,11 +10,9 @@ import java.util.List;
 @RestController
 public class DepartementRestController {
     private DepartementService departementService;
-
     public DepartementRestController(DepartementService departementService) {
         this.departementService = departementService;
     }
-
     @RequestMapping("/departements")
     public DepartementDTO save(@RequestBody DepartementDTO departementDTO) throws DepartementNotFoundException {
         return departementService.saveDepartement(departementDTO);
@@ -26,5 +24,10 @@ public class DepartementRestController {
     @GetMapping("/departements")
     public List<DepartementDTO>getAllDepartement(){
         return departementService.departementDtoList();
+    }
+    @PutMapping("/departements/{id}")
+    public DepartementDTO update(@PathVariable Long id,@RequestBody DepartementDTO departementDTO){
+        departementDTO.setId(id);
+        return departementService.updateDepartement(departementDTO);
     }
 }
