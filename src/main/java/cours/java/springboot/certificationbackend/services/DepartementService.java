@@ -20,6 +20,13 @@ public class DepartementService implements IDepartement {
     }
 
     @Override
+    public DepartementDTO getOneDepartement(Long id) throws DepartementNotFoundException {
+        Departement departement=departementRepositorie.findById(id)
+                .orElseThrow(()->new DepartementNotFoundException("Ce departement n'existe pas"));
+        return mapperDTO.fromDepartement(departement);
+    }
+
+    @Override
     public void getDepartementByNomDepartement(String nomDepartement) throws DepartementNotFoundException {
         Departement departement=departementRepositorie.getDepartementByNomDepartement(nomDepartement);
         if (departement!=null) throw new DepartementNotFoundException("Ce departement existe deja");

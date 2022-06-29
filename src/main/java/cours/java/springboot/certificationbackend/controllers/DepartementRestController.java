@@ -3,6 +3,7 @@ package cours.java.springboot.certificationbackend.controllers;
 import cours.java.springboot.certificationbackend.dtos.DepartementDTO;
 import cours.java.springboot.certificationbackend.exceptions.DepartementNotFoundException;
 import cours.java.springboot.certificationbackend.services.DepartementService;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,5 +19,9 @@ public class DepartementRestController {
     @RequestMapping("/departements")
     public DepartementDTO save(@RequestBody DepartementDTO departementDTO) throws DepartementNotFoundException {
         return departementService.saveDepartement(departementDTO);
+    }
+    @RequestMapping("/departements/{id}")
+    public DepartementDTO getOneDepartement(@PathVariable Long id) throws DepartementNotFoundException {
+        return departementService.getOneDepartement(id);
     }
 }
