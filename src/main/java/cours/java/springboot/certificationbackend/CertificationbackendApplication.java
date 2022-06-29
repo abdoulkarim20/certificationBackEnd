@@ -13,16 +13,16 @@ public class CertificationbackendApplication {
         SpringApplication.run(CertificationbackendApplication.class, args);
     }
     //@Bean
-    CommandLineRunner commandLineRunner(ProfileService profileService){
-        return args -> {
-            Profile p=new Profile();
-            //p.setLibelle("Etudiant");
-            //profileService.saveProfile(p);
-            profileService.listProfile().forEach(profile -> {
-                System.out.println(profile.getId());
-                System.out.println(profile.getLibelle());
-            });
-            profileService.searcheProfileByeLibelle("Administrateur");
+//    CommandLineRunner commandLineRunner(ProfileService profileService){
+//        return args -> {
+//            Profile p=new Profile();
+//            //p.setLibelle("Etudiant");
+//            //profileService.saveProfile(p);
+//            profileService.listProfile().forEach(profile -> {
+//                System.out.println(profile.getId());
+//                System.out.println(profile.getLibelle());
+//            });
+//            profileService.searcheProfileByeLibelle("Administrateur");
 //            for (int i=0;i<=14;i++){
 //                Administrateur a=new Administrateur();
 //                a.setPosteOccupe("dkjkkj");
@@ -36,8 +36,8 @@ public class CertificationbackendApplication {
 //                a.setEtatCompte(Etat.DESACTIVE);
 //                patientRepository.save(a);
 //                //patientRepository.save(new Administrateur(null,"djkjkj","kjkjkj","dkjkjk",new Date(),"dkjkj","kjdkjkj","dkjkj","dlkk"));
-//            }
-        };
-    }
+////            }
+//        };
+//    }
 
 }

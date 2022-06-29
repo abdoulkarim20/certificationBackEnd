@@ -1,7 +1,9 @@
 package cours.java.springboot.certificationbackend.services;
 
+import cours.java.springboot.certificationbackend.dtos.ProfileDTO;
 import cours.java.springboot.certificationbackend.entities.Profile;
 import cours.java.springboot.certificationbackend.exceptions.ProfileNotFoundException;
+import cours.java.springboot.certificationbackend.mappers.ProfileMapper;
 import cours.java.springboot.certificationbackend.repositories.ProfileRepositorie;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -9,15 +11,20 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @Transactional
 //On peu remplacer le code a la ligne 20 par l'annotation de lombok de log4j
 @Slf4j //peremt de loger un message
 public class ProfileService implements IProfilService {
-    ProfileRepositorie profileRepositorie;
-    public ProfileService(ProfileRepositorie profileRepositorie){
+    private ProfileRepositorie profileRepositorie;
+    private ProfileMapper profileMapper;
+    public ProfileService(ProfileRepositorie profileRepositorie,ProfileMapper profileMapper){
         this.profileRepositorie=profileRepositorie;
+        this.profileMapper=profileMapper;
     }
 
     @Override
@@ -38,8 +45,21 @@ public class ProfileService implements IProfilService {
     }
 
     @Override
-    public List<Profile> listProfile() {
-        return profileRepositorie.findAll();
+    public List<ProfileDTO> profileDtoList() {
+        List<Profile> profileList=profileRepositorie.findAll();
+        //Maintenant on doit transformer cette liste de profile en liste profileDto
+        List<ProfileDTO> profileDTOList=profileList.stream()
+                .map(profile -> profileMapper.fromProfile(profile))
+                .collect(Collectors.toList());
+        //On peu remplacer les ligne de code ci-dessous par les codes ci-dessus
+        /*List<ProfileDTO> profileDTOList=new ArrayList<>();
+        for (Profile profile:profileList){
+            ProfileDTO profileDTO=profileMapper.fromProfile(profile);
+            profileDTOList.add(profileDTO);
+        }
+         */
+        //Je returne la liste des profileDTO
+        return profileDTOList;
     }
 
     @Override

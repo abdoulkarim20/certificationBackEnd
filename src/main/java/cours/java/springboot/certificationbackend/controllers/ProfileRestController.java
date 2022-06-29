@@ -1,5 +1,6 @@
 package cours.java.springboot.certificationbackend.controllers;
 
+import cours.java.springboot.certificationbackend.dtos.ProfileDTO;
 import cours.java.springboot.certificationbackend.entities.Profile;
 import cours.java.springboot.certificationbackend.services.ProfileService;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +17,7 @@ public class ProfileRestController {
         this.profileService=profileService;
     }
     @GetMapping("/profiles")
-    public List<Profile> profiles(){
-        return profileService.listProfile();
+    public List<ProfileDTO> profileDTOList(){
+        return profileService.profileDtoList();
     }
 }
