@@ -1,6 +1,8 @@
 package cours.java.springboot.certificationbackend.mappers;
 
+import cours.java.springboot.certificationbackend.dtos.DepartementDTO;
 import cours.java.springboot.certificationbackend.dtos.ProfileDTO;
+import cours.java.springboot.certificationbackend.entities.Departement;
 import cours.java.springboot.certificationbackend.entities.Profile;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -21,5 +23,18 @@ public class MapperDTO {
         Profile profile=new Profile();
         BeanUtils.copyProperties(profileDTO,profile);
         return profile;
+    }
+
+    /*convertir entite departement en dto*/
+    public DepartementDTO fromDepartement(Departement departement){
+        DepartementDTO departementDTO=new DepartementDTO();
+        BeanUtils.copyProperties(departement,departementDTO);
+        return departementDTO;
+    }
+    /*Convertir entite departementDTO en entite departement*/
+    public Departement fromDepartementDTO(DepartementDTO departementDTO){
+        Departement departement=new Departement();
+        BeanUtils.copyProperties(departementDTO,departement);
+        return departement;
     }
 }
