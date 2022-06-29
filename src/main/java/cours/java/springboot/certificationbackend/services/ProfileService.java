@@ -3,28 +3,24 @@ package cours.java.springboot.certificationbackend.services;
 import cours.java.springboot.certificationbackend.dtos.ProfileDTO;
 import cours.java.springboot.certificationbackend.entities.Profile;
 import cours.java.springboot.certificationbackend.exceptions.ProfileNotFoundException;
-import cours.java.springboot.certificationbackend.mappers.ProfileMapper;
+import cours.java.springboot.certificationbackend.mappers.MapperDTO;
 import cours.java.springboot.certificationbackend.repositories.ProfileRepositorie;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 @Transactional
-//On peu remplacer le code a la ligne 20 par l'annotation de lombok de log4j
+//On peu remplacer le code pour loger un message par l'annotation de lombok de log4j
 @Slf4j //peremt de loger un message
 public class ProfileService implements IProfilService {
     private ProfileRepositorie profileRepositorie;
-    private ProfileMapper profileMapper;
-    public ProfileService(ProfileRepositorie profileRepositorie,ProfileMapper profileMapper){
+    private MapperDTO mapperDTO;
+    public ProfileService(ProfileRepositorie profileRepositorie, MapperDTO mapperDTO){
         this.profileRepositorie=profileRepositorie;
-        this.profileMapper=profileMapper;
+        this.mapperDTO = mapperDTO;
     }
 
     @Override
@@ -40,13 +36,10 @@ public class ProfileService implements IProfilService {
         //Pour maintenant afficher le message de log voir ci-dessous
         log.info("Enregistreemnt d'un profile");
         //Je transforme dabord l'entite dto en entite
-        Profile profile=profileMapper.fromProfileDTO(profileDTO);
+        Profile profile= mapperDTO.fromProfileDTO(profileDTO);
         getProfileByLibelle(profile.getLibelle());
         Profile profileSaved=profileRepositorie.save(profile);
-        return profileMapper.fromProfile(profileSaved);
-//        getProfileByLibelle(profile.getLibelle());
-//        Profile profileSaved=profileRepositorie.save(profile);
-//        return profileSaved;
+        return mapperDTO.fromProfile(profileSaved);
     }
 
     @Override
@@ -54,7 +47,7 @@ public class ProfileService implements IProfilService {
         List<Profile> profileList=profileRepositorie.findAll();
         //Maintenant on doit transformer cette liste de profile en liste profileDto
         List<ProfileDTO> profileDTOList=profileList.stream()
-                .map(profile -> profileMapper.fromProfile(profile))
+                .map(profile -> mapperDTO.fromProfile(profile))
                 .collect(Collectors.toList());
         //On peu remplacer les ligne de code ci-dessous par les codes ci-dessus
         /*List<ProfileDTO> profileDTOList=new ArrayList<>();
@@ -71,51 +64,19 @@ public class ProfileService implements IProfilService {
     public ProfileDTO getOneProfile(Long id) throws ProfileNotFoundException {
         Profile profile=profileRepositorie.findById(id)
                 .orElseThrow(()->new ProfileNotFoundException("Le profile avec cet id n'existe pas"));
-        return profileMapper.fromProfile(profile);
+        return mapperDTO.fromProfile(profile);
     }
 
     @Override
     public ProfileDTO updateProfile(ProfileDTO profileDTO) throws ProfileNotFoundException {
-        Profile profile=profileMapper.fromProfileDTO(profileDTO);
+        Profile profile= mapperDTO.fromProfileDTO(profileDTO);
         Profile profileUpdated=profileRepositorie.save(profile);
-        return profileMapper.fromProfile(profileUpdated);
+        return mapperDTO.fromProfile(profileUpdated);
     }
 
     @Override
     public void deleteProfile(Long id) throws ProfileNotFoundException {
+        getOneProfile(id);
         profileRepositorie.deleteById(id);
-    }
-
-//    @Override
-//    public Profile updateProfile(Long id,Profile profile) throws ProfileNotFoundException {
-////        Profile profileEdit=getOneProfile(id);
-////        profileEdit.setLibelle(profile.getLibelle());
-////        try {
-////            return profileRepositorie.save(profileEdit);
-////        }catch (Exception e){
-////            throw new  ProfileNotFoundException(e.getMessage());
-////        }
-//        return null;
-//    }
-
-//    @Override
-//    public Profile deleteProfile(Long id) throws ProfileNotFoundException {
-////        Profile profile=getOneProfile(id);
-////        try {
-////            profileRepositorie.delete(profile);
-////            return profile;
-////        }catch (Exception e){
-////            throw new ProfileNotFoundException("Impossible de supprimer un profile detenu par un Utilisateur");
-////        }
-//        return null;
-//    }
-
-    @Override
-    public Profile searcheProfileByeLibelle(String libelle) throws ProfileNotFoundException {
-        Profile profile=profileRepositorie.getProfileByLibelleContains(libelle);
-        if (profile==null){ throw new ProfileNotFoundException("Profile inexistant");
-        }else {
-            return profile;
-        }
     }
 }

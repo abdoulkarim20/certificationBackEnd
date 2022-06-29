@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @Slf4j
@@ -37,4 +38,8 @@ public class ProfileRestController {
     public void delete(@PathVariable Long id) throws ProfileNotFoundException {
         profileService.deleteProfile(id);
     }
+//    @GetMapping("/profiles/{libelle}")
+//    public Profile(@PathVariable String libelle) throws ProfileNotFoundException {
+//        profileService.searcheProfileByeLibelle(libelle);
+//    }
 }

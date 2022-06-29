@@ -6,7 +6,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ProfileMapper {
+public class MapperDTO {
     //La methode qui transforme entite en entites dto
     public ProfileDTO fromProfile(Profile profile){
         ProfileDTO profileDTO=new ProfileDTO();

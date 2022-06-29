@@ -16,7 +16,7 @@ public class Profile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String libelle;
-    @OneToMany(mappedBy = "profile",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "profile",fetch = FetchType.LAZY)
 //            @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     List<Utilisateur> utilisateurs;
 }

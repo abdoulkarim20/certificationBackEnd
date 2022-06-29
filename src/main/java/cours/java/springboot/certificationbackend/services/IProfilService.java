@@ -13,5 +13,4 @@ public interface IProfilService {
     ProfileDTO getOneProfile(Long id) throws ProfileNotFoundException;
     ProfileDTO updateProfile(ProfileDTO profileDTO) throws ProfileNotFoundException;
     void deleteProfile(Long id) throws ProfileNotFoundException;
-    Profile searcheProfileByeLibelle(String libelle) throws ProfileNotFoundException;
 }
