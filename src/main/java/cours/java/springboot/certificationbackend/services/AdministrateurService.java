@@ -2,6 +2,7 @@ package cours.java.springboot.certificationbackend.services;
 
 import cours.java.springboot.certificationbackend.dtos.AdministrateurDTO;
 import cours.java.springboot.certificationbackend.entities.Administrateur;
+import cours.java.springboot.certificationbackend.exceptions.AdministrateurNotFoundException;
 import cours.java.springboot.certificationbackend.mappers.MapperDTO;
 import cours.java.springboot.certificationbackend.repositories.AdministrateurRepositorie;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,12 @@ public class AdministrateurService implements IAdministrateur {
         List<AdministrateurDTO>administrateurDTOS=administrateurs.stream()
                 .map(administrateur ->mapperDTO.fromAdminstrateur(administrateur))
                 .collect(Collectors.toList());
-
         return administrateurDTOS;
+    }
+    @Override
+    public AdministrateurDTO getOnAdmninstrateur(Long id) throws AdministrateurNotFoundException {
+        Administrateur administrateur=administrateurRepositorie.findById(id)
+                .orElseThrow(()->new AdministrateurNotFoundException("Cet administrateur n'existe pas"));
+        return mapperDTO.fromAdminstrateur(administrateur);
     }
 }
