@@ -1,7 +1,9 @@
 package cours.java.springboot.certificationbackend.mappers;
 
+import cours.java.springboot.certificationbackend.dtos.AdministrateurDTO;
 import cours.java.springboot.certificationbackend.dtos.DepartementDTO;
 import cours.java.springboot.certificationbackend.dtos.ProfileDTO;
+import cours.java.springboot.certificationbackend.entities.Administrateur;
 import cours.java.springboot.certificationbackend.entities.Departement;
 import cours.java.springboot.certificationbackend.entities.Profile;
 import org.springframework.beans.BeanUtils;
@@ -36,5 +38,22 @@ public class MapperDTO {
         Departement departement=new Departement();
         BeanUtils.copyProperties(departementDTO,departement);
         return departement;
+    }
+
+    /*Convertir entite Administrateur en entite AdministrateurDTO*/
+    public AdministrateurDTO fromAdminstrateur(Administrateur administrateur){
+        AdministrateurDTO administrateurDTO=new AdministrateurDTO();
+        BeanUtils.copyProperties(administrateur,administrateurDTO);
+        administrateurDTO.setProfileDTO(fromProfile(administrateur.getProfile()));
+        administrateurDTO.setDepartementDTO(fromDepartement(administrateur.getDepartement()));
+        return administrateurDTO;
+    }
+    /*Convertir AdministrateurDTO en Administrateur*/
+    public Administrateur formAdministrateurDTO(AdministrateurDTO administrateurDTO){
+        Administrateur administrateur=new Administrateur();
+        BeanUtils.copyProperties(administrateurDTO,administrateur);
+        administrateur.setProfile(fromProfileDTO(administrateurDTO.getProfileDTO()));
+        administrateur.setDepartement(fromDepartementDTO(administrateurDTO.getDepartementDTO()));
+        return administrateur;
     }
 }

@@ -68,7 +68,7 @@ public class ProfileService implements IProfilService {
     }
 
     @Override
-    public ProfileDTO updateProfile(ProfileDTO profileDTO) throws ProfileNotFoundException {
+    public ProfileDTO updateProfile(ProfileDTO profileDTO) {
         Profile profile= mapperDTO.fromProfileDTO(profileDTO);
         Profile profileUpdated=profileRepositorie.save(profile);
         return mapperDTO.fromProfile(profileUpdated);

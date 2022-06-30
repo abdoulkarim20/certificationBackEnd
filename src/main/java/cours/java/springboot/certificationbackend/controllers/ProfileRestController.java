@@ -17,15 +17,15 @@ public class ProfileRestController {
         this.profileService=profileService;
     }
     @GetMapping("/profiles")
-    public List<ProfileDTO> profileDTOList(){
+    public List<ProfileDTO> getAll(){
         return profileService.profileDtoList();
     }
     @GetMapping("/profiles/{id}")
-    public  ProfileDTO getOnProfile(@PathVariable(name = "id") Long id) throws ProfileNotFoundException {
+    public  ProfileDTO getOn(@PathVariable(name = "id") Long id) throws ProfileNotFoundException {
         return profileService.getOneProfile(id);
     }
     @PostMapping("/profiles")
-    public ProfileDTO saveProfile(@RequestBody ProfileDTO profileDTO) throws ProfileNotFoundException {
+    public ProfileDTO save(@RequestBody ProfileDTO profileDTO) throws ProfileNotFoundException {
         return profileService.saveProfile(profileDTO);
     }
     @PutMapping("/profiles/{id}")
@@ -37,8 +37,4 @@ public class ProfileRestController {
     public void delete(@PathVariable Long id) throws ProfileNotFoundException {
         profileService.deleteProfile(id);
     }
-//    @GetMapping("/profiles/{libelle}")
-//    public Profile(@PathVariable String libelle) throws ProfileNotFoundException {
-//        profileService.searcheProfileByeLibelle(libelle);
-//    }
 }

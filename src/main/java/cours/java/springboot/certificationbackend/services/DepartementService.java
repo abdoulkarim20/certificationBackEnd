@@ -58,4 +58,15 @@ public class DepartementService implements IDepartement {
         Departement departementUpdated=departementRepositorie.save(departement);
         return mapperDTO.fromDepartement(departementUpdated);
     }
+
+    @Override
+    public void deleteDepartement(Long id) throws DepartementNotFoundException {
+        Departement departement=departementRepositorie.findById(id)
+                .orElseThrow(() -> new DepartementNotFoundException("Departement innexistant"));
+        try {
+            departementRepositorie.delete(departement);
+        }catch (Exception e){
+            throw new  DepartementNotFoundException("Impossible de supprimer un departement dans lequel figure des administrateur");
+        }
+    }
 }

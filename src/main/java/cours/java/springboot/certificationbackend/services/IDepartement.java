@@ -11,4 +11,5 @@ public interface IDepartement {
     public void getDepartementByNomDepartement(String nomDepartement) throws DepartementNotFoundException;
     public DepartementDTO saveDepartement(DepartementDTO departementDTO) throws DepartementNotFoundException;
     public DepartementDTO updateDepartement(DepartementDTO departementDTO);
+    public void deleteDepartement(Long id) throws DepartementNotFoundException;
 }
