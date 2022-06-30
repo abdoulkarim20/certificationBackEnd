@@ -10,5 +10,7 @@ public interface IAdministrateur {
 
     AdministrateurDTO getOnAdmninstrateur(Long id) throws AdministrateurNotFoundException;
 
+    void administrateurExiste(String email, String telephone, String username) throws AdministrateurNotFoundException;
+
     AdministrateurDTO saveAdministrateur(AdministrateurDTO administrateurDTO) throws AdministrateurNotFoundException;
 }

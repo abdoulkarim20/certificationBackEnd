@@ -36,15 +36,17 @@ public class AdministrateurService implements IAdministrateur {
         return mapperDTO.fromAdminstrateur(administrateur);
     }
     @Override
-    public AdministrateurDTO saveAdministrateur(AdministrateurDTO administrateurDTO) throws AdministrateurNotFoundException {
-        Administrateur administrateur=mapperDTO.formAdministrateurDTO(administrateurDTO);
-        administrateurRepositorie
+    public void administrateurExiste(String email, String telephone, String username) throws AdministrateurNotFoundException {
+        Administrateur administrateur=administrateurRepositorie
                 .getAdministrateurByEmailOrTelephoneOrUsername(
-                        administrateur.getEmail(),
-                        administrateur.getTelephone(),
-                        administrateur.getUsername()
+                        email,telephone,username
                 );
         if (administrateur!=null) throw new AdministrateurNotFoundException("Cet utilisateur existe deja");
+    }
+    @Override
+    public AdministrateurDTO saveAdministrateur(AdministrateurDTO administrateurDTO) throws AdministrateurNotFoundException {
+        Administrateur administrateur=mapperDTO.formAdministrateurDTO(administrateurDTO);
+        administrateurExiste(administrateur.getEmail(),administrateur.getTelephone(),administrateur.getUsername());
         Administrateur administrateurSaved=administrateurRepositorie.save(administrateur);
         return mapperDTO.fromAdminstrateur(administrateurSaved);
     }
