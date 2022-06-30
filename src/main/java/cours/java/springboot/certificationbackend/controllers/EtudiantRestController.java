@@ -27,7 +27,7 @@ public class EtudiantRestController {
     public EtudiantDTO getOne(@PathVariable Long id) throws EtudiantNotFoundException {
         return etudiantService.getOneEtudiant(id);
     }
-    @PutMapping("/etudiants{id}")
+    @PutMapping("/etudiants/{id}")
     public EtudiantDTO update(@PathVariable Long id,@RequestBody EtudiantDTO etudiantDTO){
         etudiantDTO.setId(id);
         return etudiantService.updateEtudiant(etudiantDTO);
