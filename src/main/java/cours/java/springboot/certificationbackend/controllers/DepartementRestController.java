@@ -26,7 +26,7 @@ public class DepartementRestController {
         return departementService.getOneDepartement(id);
     }
 
-    @RequestMapping("/departements")
+    @PostMapping("/departements")
     public DepartementDTO save(@RequestBody DepartementDTO departementDTO) throws DepartementNotFoundException {
         return departementService.saveDepartement(departementDTO);
     }
