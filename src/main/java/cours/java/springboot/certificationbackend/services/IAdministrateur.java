@@ -13,4 +13,8 @@ public interface IAdministrateur {
     void administrateurExiste(String email, String telephone, String username) throws AdministrateurNotFoundException;
 
     AdministrateurDTO saveAdministrateur(AdministrateurDTO administrateurDTO) throws AdministrateurNotFoundException;
+
+    AdministrateurDTO updateAdministrateur(AdministrateurDTO administrateurDTO);
+
+    void deleteAdministrateur(Long id) throws AdministrateurNotFoundException;
 }

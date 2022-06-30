@@ -28,4 +28,13 @@ public class AdministrateurRestController {
     public AdministrateurDTO save(@RequestBody AdministrateurDTO administrateurDTO) throws AdministrateurNotFoundException {
         return administrateurService.saveAdministrateur(administrateurDTO);
     }
+    @PutMapping("/administrateurs/{id}")
+    public AdministrateurDTO update(@PathVariable Long id,@RequestBody AdministrateurDTO administrateurDTO){
+        administrateurDTO.setId(id);
+        return administrateurService.updateAdministrateur(administrateurDTO);
+    }
+    @DeleteMapping("/administrateurs/{id}")
+    public void delete(@PathVariable Long id) throws AdministrateurNotFoundException {
+        administrateurService.deleteAdministrateur(id);
+    }
 }

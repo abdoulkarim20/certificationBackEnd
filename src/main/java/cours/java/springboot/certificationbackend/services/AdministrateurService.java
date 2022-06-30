@@ -50,4 +50,16 @@ public class AdministrateurService implements IAdministrateur {
         Administrateur administrateurSaved=administrateurRepositorie.save(administrateur);
         return mapperDTO.fromAdminstrateur(administrateurSaved);
     }
+    @Override
+    public AdministrateurDTO updateAdministrateur(AdministrateurDTO administrateurDTO){
+        Administrateur administrateur=mapperDTO.formAdministrateurDTO(administrateurDTO);
+        Administrateur administrateurUpdated=administrateurRepositorie.save(administrateur);
+        return mapperDTO.fromAdminstrateur(administrateurUpdated);
+    }
+    @Override
+    public void deleteAdministrateur(Long id) throws AdministrateurNotFoundException {
+        Administrateur administrateur=administrateurRepositorie.findById(id)
+                .orElseThrow(()->new AdministrateurNotFoundException("Cet id n'existe pas"));
+        administrateurRepositorie.delete(administrateur);
+    }
 }
