@@ -57,6 +57,7 @@ public class MapperDTO {
         EtudiantDTO etudiantDTO=new EtudiantDTO();
         BeanUtils.copyProperties(etudiant,etudiantDTO);
         etudiantDTO.setProfileDTO(fromProfile(etudiant.getProfile()));
+        etudiantDTO.setFiliereDTO(fromFiliere(etudiant.getFiliere()));
         return etudiantDTO;
     }
     /*Convertir EtudiantDTO en Etudiant*/
@@ -64,6 +65,7 @@ public class MapperDTO {
         Etudiant etudiant=new Etudiant();
         BeanUtils.copyProperties(etudiantDTO,etudiant);
         etudiant.setProfile(fromProfileDTO(etudiantDTO.getProfileDTO()));
+        etudiant.setFiliere(fromFiliereDTO(etudiantDTO.getFiliereDTO()));
         return etudiant;
     }
     /*Convertir entite Filiere en entite FiliereDTO*/

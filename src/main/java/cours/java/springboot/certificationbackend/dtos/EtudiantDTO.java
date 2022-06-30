@@ -19,7 +19,7 @@ public class EtudiantDTO {
     private String matricule;
     private Niveau niveauEtude;
     private String photo;
-    //private FiliereDTO filiereDTO;
+    private FiliereDTO filiereDTO;
     private String username;
     private String password;
 }
