@@ -59,8 +59,9 @@ public class EtudiantService implements IEtudiantService {
     }
     @Override
     public void deleteEtudiant(Long id) throws EtudiantNotFoundException {
-        Etudiant etudiant=etudiantRepositorie.findById(id).get();
-        if (etudiant==null) throw new  EtudiantNotFoundException("Id innexistant");
+        Etudiant etudiant=etudiantRepositorie.findById(id).orElseThrow(
+                ()->new EtudiantNotFoundException("Id innexistant")
+        );
         etudiantRepositorie.deleteById(id);
     }
 }
