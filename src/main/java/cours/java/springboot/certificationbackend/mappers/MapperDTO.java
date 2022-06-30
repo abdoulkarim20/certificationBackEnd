@@ -2,9 +2,11 @@ package cours.java.springboot.certificationbackend.mappers;
 
 import cours.java.springboot.certificationbackend.dtos.AdministrateurDTO;
 import cours.java.springboot.certificationbackend.dtos.DepartementDTO;
+import cours.java.springboot.certificationbackend.dtos.EtudiantDTO;
 import cours.java.springboot.certificationbackend.dtos.ProfileDTO;
 import cours.java.springboot.certificationbackend.entities.Administrateur;
 import cours.java.springboot.certificationbackend.entities.Departement;
+import cours.java.springboot.certificationbackend.entities.Etudiant;
 import cours.java.springboot.certificationbackend.entities.Profile;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -55,5 +57,19 @@ public class MapperDTO {
         administrateur.setProfile(fromProfileDTO(administrateurDTO.getProfileDTO()));
         administrateur.setDepartement(fromDepartementDTO(administrateurDTO.getDepartementDTO()));
         return administrateur;
+    }
+    /*Convertir entite Etudiant en entite EtudiantDTO*/
+    public EtudiantDTO fromEtudiant(Etudiant etudiant){
+        EtudiantDTO etudiantDTO=new EtudiantDTO();
+        BeanUtils.copyProperties(etudiant,etudiantDTO);
+        etudiantDTO.setProfileDTO(fromProfile(etudiant.getProfile()));
+        return etudiantDTO;
+    }
+    /*Convertir EtudiantDTO en Etudiant*/
+    public Etudiant fromEtudiantDTO(EtudiantDTO etudiantDTO){
+        Etudiant etudiant=new Etudiant();
+        BeanUtils.copyProperties(etudiantDTO,etudiant);
+        etudiant.setProfile(fromProfileDTO(etudiantDTO.getProfileDTO()));
+        return etudiant;
     }
 }

@@ -5,7 +5,7 @@ import cours.java.springboot.certificationbackend.exceptions.AdministrateurNotFo
 
 import java.util.List;
 
-public interface IAdministrateur {
+public interface IAdministrateurService {
     List<AdministrateurDTO> getAllAdministrations();
 
     AdministrateurDTO getOnAdmninstrateur(Long id) throws AdministrateurNotFoundException;

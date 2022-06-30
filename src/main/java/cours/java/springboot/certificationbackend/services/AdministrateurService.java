@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
-public class AdministrateurService implements IAdministrateur {
+public class AdministrateurService implements IAdministrateurService {
     private AdministrateurRepositorie administrateurRepositorie;
     private MapperDTO mapperDTO;
 
