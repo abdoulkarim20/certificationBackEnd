@@ -4,9 +4,7 @@ import cours.java.springboot.certificationbackend.dtos.AdministrateurDTO;
 import cours.java.springboot.certificationbackend.exceptions.AdministrateurNotFoundException;
 import cours.java.springboot.certificationbackend.services.AdministrateurService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,5 +23,9 @@ public class AdministrateurRestController {
     @GetMapping("/administrateurs/{id}")
     public AdministrateurDTO getOne(@PathVariable Long id) throws AdministrateurNotFoundException {
         return administrateurService.getOnAdmninstrateur(id);
+    }
+    @PostMapping("/administrateurs")
+    public AdministrateurDTO save(@RequestBody AdministrateurDTO administrateurDTO) throws AdministrateurNotFoundException {
+        return administrateurService.saveAdministrateur(administrateurDTO);
     }
 }

@@ -35,4 +35,17 @@ public class AdministrateurService implements IAdministrateur {
                 .orElseThrow(()->new AdministrateurNotFoundException("Cet administrateur n'existe pas"));
         return mapperDTO.fromAdminstrateur(administrateur);
     }
+    @Override
+    public AdministrateurDTO saveAdministrateur(AdministrateurDTO administrateurDTO) throws AdministrateurNotFoundException {
+        Administrateur administrateur=mapperDTO.formAdministrateurDTO(administrateurDTO);
+        administrateurRepositorie
+                .getAdministrateurByEmailOrTelephoneOrUsername(
+                        administrateur.getEmail(),
+                        administrateur.getTelephone(),
+                        administrateur.getUsername()
+                );
+        if (administrateur!=null) throw new AdministrateurNotFoundException("Cet utilisateur existe deja");
+        Administrateur administrateurSaved=administrateurRepositorie.save(administrateur);
+        return mapperDTO.fromAdminstrateur(administrateurSaved);
+    }
 }

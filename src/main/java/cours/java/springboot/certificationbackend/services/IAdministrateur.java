@@ -9,4 +9,6 @@ public interface IAdministrateur {
     List<AdministrateurDTO> getAllAdministrations();
 
     AdministrateurDTO getOnAdmninstrateur(Long id) throws AdministrateurNotFoundException;
+
+    AdministrateurDTO saveAdministrateur(AdministrateurDTO administrateurDTO) throws AdministrateurNotFoundException;
 }
