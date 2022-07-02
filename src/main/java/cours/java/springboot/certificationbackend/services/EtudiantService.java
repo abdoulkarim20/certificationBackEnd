@@ -1,9 +1,12 @@
 package cours.java.springboot.certificationbackend.services;
 
+import cours.java.springboot.certificationbackend.dtos.DemandeDTO;
 import cours.java.springboot.certificationbackend.dtos.EtudiantDTO;
+import cours.java.springboot.certificationbackend.entities.Demande;
 import cours.java.springboot.certificationbackend.entities.Etudiant;
 import cours.java.springboot.certificationbackend.exceptions.EtudiantNotFoundException;
 import cours.java.springboot.certificationbackend.mappers.MapperDTO;
+import cours.java.springboot.certificationbackend.repositories.DemandeRepositorie;
 import cours.java.springboot.certificationbackend.repositories.EtudiantRepositorie;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,10 +19,12 @@ import java.util.stream.Collectors;
 public class EtudiantService implements IEtudiantService {
     private EtudiantRepositorie etudiantRepositorie;
     private MapperDTO mapperDTO;
+    private DemandeRepositorie demandeRepositorie;
 
-    public EtudiantService(EtudiantRepositorie etudiantRepositorie, MapperDTO mapperDTO) {
+    public EtudiantService(EtudiantRepositorie etudiantRepositorie, MapperDTO mapperDTO, DemandeRepositorie demandeRepositorie) {
         this.etudiantRepositorie = etudiantRepositorie;
         this.mapperDTO = mapperDTO;
+        this.demandeRepositorie = demandeRepositorie;
     }
     @Override
     public void existeEtudiant(String email, String telephone, String username) throws EtudiantNotFoundException {
@@ -63,5 +68,12 @@ public class EtudiantService implements IEtudiantService {
                 ()->new EtudiantNotFoundException("Id innexistant")
         );
         etudiantRepositorie.deleteById(id);
+    }
+    @Override
+    public List<DemandeDTO> demandesEtudiants(Long id){
+        List<Demande> listeDemande = demandeRepositorie.findByEtudiantId(id);
+        return listeDemande.stream()
+                .map(demande -> mapperDTO.fromDemande(demande))
+                .collect(Collectors.toList());
     }
 }

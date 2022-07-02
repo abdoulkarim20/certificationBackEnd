@@ -1,5 +1,6 @@
 package cours.java.springboot.certificationbackend.controllers;
 
+import cours.java.springboot.certificationbackend.dtos.DemandeDTO;
 import cours.java.springboot.certificationbackend.dtos.EtudiantDTO;
 import cours.java.springboot.certificationbackend.entities.Etudiant;
 import cours.java.springboot.certificationbackend.exceptions.EtudiantNotFoundException;
@@ -35,5 +36,9 @@ public class EtudiantRestController {
     @DeleteMapping("/etudiants/{id}")
     public void delete(@PathVariable Long id) throws EtudiantNotFoundException {
         etudiantService.deleteEtudiant(id);
+    }
+    @GetMapping("/etudiants/{id}/demandes")
+    public List<DemandeDTO> allDemandeByEtudiant(@PathVariable Long id){
+        return etudiantService.demandesEtudiants(id);
     }
 }

@@ -1,5 +1,6 @@
 package cours.java.springboot.certificationbackend.services;
 
+import cours.java.springboot.certificationbackend.dtos.DemandeDTO;
 import cours.java.springboot.certificationbackend.dtos.EtudiantDTO;
 import cours.java.springboot.certificationbackend.exceptions.EtudiantNotFoundException;
 
@@ -17,4 +18,6 @@ public interface IEtudiantService {
     EtudiantDTO updateEtudiant(EtudiantDTO etudiantDTO);
 
     void deleteEtudiant(Long id) throws EtudiantNotFoundException;
+
+    List<DemandeDTO> demandesEtudiants(Long id);
 }
