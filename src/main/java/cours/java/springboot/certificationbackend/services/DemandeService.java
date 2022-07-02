@@ -2,6 +2,7 @@ package cours.java.springboot.certificationbackend.services;
 
 import cours.java.springboot.certificationbackend.dtos.DemandeDTO;
 import cours.java.springboot.certificationbackend.entities.Demande;
+import cours.java.springboot.certificationbackend.enums.Statut;
 import cours.java.springboot.certificationbackend.exceptions.DemandeNotFoundExeception;
 import cours.java.springboot.certificationbackend.mappers.MapperDTO;
 import cours.java.springboot.certificationbackend.repositories.DemandeRepositorie;
@@ -53,5 +54,13 @@ public class DemandeService implements IDemandeService {
         DemandeDTO demandeDTO=getOneDemande(id);
         Demande demande=mapperDTO.fromDemandeDTO(demandeDTO);
         demandeRepositorie.delete(demande);
+    }
+    @Override
+    public DemandeDTO validerDemande(Long id) throws DemandeNotFoundExeception {
+        Demande demande=demandeRepositorie.findById(id).get();
+        DemandeDTO demandeDTO=mapperDTO.fromDemande(demande);
+        demande.setStatutDemande(Statut.Approuver);
+        Demande demandeValider=demandeRepositorie.save(demande);
+        return demandeDTO;
     }
 }

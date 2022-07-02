@@ -35,4 +35,8 @@ public class DemandeRestController {
     public void delete(@PathVariable Long id) throws DemandeNotFoundExeception {
         demandeService.deleteDemande(id);
     }
+    @PutMapping("/demandes/valider/{id}")
+    public DemandeDTO valider(@PathVariable Long id) throws DemandeNotFoundExeception {
+        return demandeService.validerDemande(id);
+    }
 }
