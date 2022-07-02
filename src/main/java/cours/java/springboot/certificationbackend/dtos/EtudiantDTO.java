@@ -3,8 +3,6 @@ import cours.java.springboot.certificationbackend.enums.Etat;
 import cours.java.springboot.certificationbackend.enums.Niveau;
 import lombok.Data;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import java.util.Date;
 @Data
 public class EtudiantDTO {

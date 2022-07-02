@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -32,5 +33,25 @@ public class DemandeService implements IDemandeService {
         Demande demande=demandeRepositorie.findById(id)
                 .orElseThrow(()->new DemandeNotFoundExeception("Cette demande n'existe pas"));
         return mapperDTO.fromDemande(demande);
+    }
+    @Override
+    public List<DemandeDTO>getAllDemandes(){
+        List<Demande>demandeList=demandeRepositorie.findAll();
+        List<DemandeDTO>demandeDTOS=demandeList.stream()
+                .map(demande -> mapperDTO.fromDemande(demande))
+                .collect(Collectors.toList());
+        return demandeDTOS;
+    }
+    @Override
+    public DemandeDTO updateDemande(DemandeDTO demandeDTO){
+        Demande demande=mapperDTO.fromDemandeDTO(demandeDTO);
+        Demande demandeUpdated=demandeRepositorie.save(demande);
+        return demandeDTO;
+    }
+    @Override
+    public void deleteDemande(Long id) throws DemandeNotFoundExeception {
+        DemandeDTO demandeDTO=getOneDemande(id);
+        Demande demande=mapperDTO.fromDemandeDTO(demandeDTO);
+        demandeRepositorie.delete(demande);
     }
 }

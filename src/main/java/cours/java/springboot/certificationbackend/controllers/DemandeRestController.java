@@ -5,6 +5,8 @@ import cours.java.springboot.certificationbackend.exceptions.DemandeNotFoundExec
 import cours.java.springboot.certificationbackend.services.DemandeService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class DemandeRestController {
     private DemandeService demandeService;
@@ -19,5 +21,18 @@ public class DemandeRestController {
     @GetMapping("/demandes/{id}")
     public DemandeDTO getOne(@PathVariable Long id) throws DemandeNotFoundExeception {
         return demandeService.getOneDemande(id);
+    }
+    @GetMapping("/demandes")
+    public List<DemandeDTO>getAll(){
+        return demandeService.getAllDemandes();
+    }
+    @PutMapping("/demandes/{id}")
+    public DemandeDTO update(@PathVariable Long id,@RequestBody DemandeDTO demandeDTO){
+        demandeDTO.setId(id);
+        return demandeService.updateDemande(demandeDTO);
+    }
+    @DeleteMapping("/demandes/{id}")
+    public void delete(@PathVariable Long id) throws DemandeNotFoundExeception {
+        demandeService.deleteDemande(id);
     }
 }
