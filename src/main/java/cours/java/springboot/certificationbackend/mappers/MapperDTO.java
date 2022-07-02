@@ -56,16 +56,16 @@ public class MapperDTO {
     public EtudiantDTO fromEtudiant(Etudiant etudiant){
         EtudiantDTO etudiantDTO=new EtudiantDTO();
         BeanUtils.copyProperties(etudiant,etudiantDTO);
-        etudiantDTO.setProfileDTO(fromProfile(etudiant.getProfile()));
-        etudiantDTO.setFiliereDTO(fromFiliere(etudiant.getFiliere()));
+//        etudiantDTO.setProfileDTO(fromProfile(etudiant.getProfile()));
+//        etudiantDTO.setFiliereDTO(fromFiliere(etudiant.getFiliere()));
         return etudiantDTO;
     }
     /*Convertir EtudiantDTO en Etudiant*/
     public Etudiant fromEtudiantDTO(EtudiantDTO etudiantDTO){
         Etudiant etudiant=new Etudiant();
         BeanUtils.copyProperties(etudiantDTO,etudiant);
-        etudiant.setProfile(fromProfileDTO(etudiantDTO.getProfileDTO()));
-        etudiant.setFiliere(fromFiliereDTO(etudiantDTO.getFiliereDTO()));
+//        etudiant.setProfile(fromProfileDTO(etudiantDTO.getProfileDTO()));
+//        etudiant.setFiliere(fromFiliereDTO(etudiantDTO.getFiliereDTO()));
         return etudiant;
     }
     /*Convertir entite Filiere en entite FiliereDTO*/
@@ -79,5 +79,21 @@ public class MapperDTO {
         Filiere filiere=new Filiere();
         BeanUtils.copyProperties(filiereDTO,filiere);
         return filiere;
+    }
+    /*Convertir entite Demande en entite DemandeDTO*/
+    public DemandeDTO fromDemande(Demande demande){
+        DemandeDTO demandeDTO=new DemandeDTO();
+        BeanUtils.copyProperties(demande,demandeDTO);
+        demandeDTO.setEtudiant(fromEtudiant(demande.getEtudiant()));
+        demandeDTO.setDepartement(fromDepartement(demande.getDepartement()));
+        return demandeDTO;
+    }
+    /*Convertir entite DemandeDTO en entite Demande*/
+    public Demande fromDemandeDTO(DemandeDTO demandeDTO){
+        Demande demande=new Demande();
+        BeanUtils.copyProperties(demandeDTO,demande);
+        demande.setEtudiant(fromEtudiantDTO(demandeDTO.getEtudiant()));
+        demande.setDepartement(fromDepartementDTO(demandeDTO.getDepartement()));
+        return demande;
     }
 }

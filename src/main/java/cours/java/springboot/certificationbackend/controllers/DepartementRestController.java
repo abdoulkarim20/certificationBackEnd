@@ -2,7 +2,7 @@ package cours.java.springboot.certificationbackend.controllers;
 
 import cours.java.springboot.certificationbackend.dtos.DepartementDTO;
 import cours.java.springboot.certificationbackend.exceptions.DepartementNotFoundException;
-import cours.java.springboot.certificationbackend.services.DepartementService;
+import cours.java.springboot.certificationbackend.services.DepartementServiceService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,8 +11,8 @@ import java.util.List;
 @RestController
 @Slf4j
 public class DepartementRestController {
-    private DepartementService departementService;
-    public DepartementRestController(DepartementService departementService) {
+    private DepartementServiceService departementService;
+    public DepartementRestController(DepartementServiceService departementService) {
         this.departementService = departementService;
     }
 

@@ -15,7 +15,7 @@ import java.util.Date;
 public abstract class Utilisateur {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)//par defaut hibernate AUTO cest IDENTITY
-    private Long Id;
+    private Long id;
     private String nom;
     private String prenoms;
     private Date dateNaissance;

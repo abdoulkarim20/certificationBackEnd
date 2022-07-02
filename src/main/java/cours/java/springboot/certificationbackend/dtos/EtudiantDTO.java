@@ -9,17 +9,17 @@ import java.util.Date;
 @Data
 public class EtudiantDTO {
     private Long Id;
-    private String nom;
-    private String prenoms;
-    private Date dateNaissance;
-    private String email;
-    private String telephone;
-    private Etat etatCompte;
-    private ProfileDTO profileDTO;
-    private String matricule;
-    private Niveau niveauEtude;
-    private String photo;
-    private FiliereDTO filiereDTO;
-    private String username;
-    private String password;
+//    private String nom;
+//    private String prenoms;
+//    private Date dateNaissance;
+//    private String email;
+//    private String telephone;
+//    private Etat etatCompte;
+//    private ProfileDTO profileDTO;
+//    private String matricule;
+//    private Niveau niveauEtude;
+//    private String photo;
+//    private FiliereDTO filiereDTO;
+//    private String username;
+//    private String password;
 }

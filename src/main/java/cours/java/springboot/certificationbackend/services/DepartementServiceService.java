@@ -13,11 +13,11 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
-public class DepartementService implements IDepartement {
+public class DepartementServiceService implements IDepartementService {
     private MapperDTO mapperDTO;
     private DepartementRepositorie departementRepositorie;
 
-    public DepartementService(MapperDTO mapperDTO, DepartementRepositorie departementRepositorie) {
+    public DepartementServiceService(MapperDTO mapperDTO, DepartementRepositorie departementRepositorie) {
         this.mapperDTO = mapperDTO;
         this.departementRepositorie = departementRepositorie;
     }

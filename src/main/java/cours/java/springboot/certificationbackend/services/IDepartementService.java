@@ -5,7 +5,7 @@ import cours.java.springboot.certificationbackend.exceptions.DepartementNotFound
 
 import java.util.List;
 
-public interface IDepartement {
+public interface IDepartementService {
     public List<DepartementDTO>departementDtoList();
     public DepartementDTO getOneDepartement(Long id) throws DepartementNotFoundException;
     public void getDepartementByNomDepartement(String nomDepartement) throws DepartementNotFoundException;

@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class DepartementDTO {
     private Long id;
-    private String nomDepartement;
+    //private String nomDepartement;
 }
