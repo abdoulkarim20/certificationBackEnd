@@ -15,6 +15,6 @@ public class Filiere {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String libelle;
-    @OneToMany(mappedBy = "filiere",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "filiere",fetch = FetchType.LAZY)
     private List<Etudiant>etudiants;
 }

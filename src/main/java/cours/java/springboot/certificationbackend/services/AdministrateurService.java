@@ -2,6 +2,7 @@ package cours.java.springboot.certificationbackend.services;
 
 import cours.java.springboot.certificationbackend.dtos.AdministrateurDTO;
 import cours.java.springboot.certificationbackend.entities.Administrateur;
+import cours.java.springboot.certificationbackend.enums.Etat;
 import cours.java.springboot.certificationbackend.exceptions.AdministrateurNotFoundException;
 import cours.java.springboot.certificationbackend.mappers.MapperDTO;
 import cours.java.springboot.certificationbackend.repositories.AdministrateurRepositorie;
@@ -61,5 +62,31 @@ public class AdministrateurService implements IAdministrateurService {
         Administrateur administrateur=administrateurRepositorie.findById(id)
                 .orElseThrow(()->new AdministrateurNotFoundException("Cet id n'existe pas"));
         administrateurRepositorie.delete(administrateur);
+    }
+
+    @Override
+    public AdministrateurDTO desactiveCompte(Long id) {
+        Administrateur administrateur=administrateurRepositorie.findById(id).get();
+        AdministrateurDTO administrateurDTO=mapperDTO.fromAdminstrateur(administrateur);
+        administrateur.setEtatCompte(Etat.DESACTIVE);
+        Administrateur administrateurDesactive=administrateurRepositorie.save(administrateur);
+        return administrateurDTO;
+    }
+
+    @Override
+    public AdministrateurDTO activeCompte(Long id) {
+        Administrateur administrateur=administrateurRepositorie.findById(id).get();
+        AdministrateurDTO administrateurDTO=mapperDTO.fromAdminstrateur(administrateur);
+        administrateur.setEtatCompte(Etat.ACTIVE);
+        Administrateur administrateurDesactive=administrateurRepositorie.save(administrateur);
+        return administrateurDTO;
+    }
+    @Override
+    public List<AdministrateurDTO> searchAdministrateur(String motCle){
+        List<Administrateur> administrateurList=administrateurRepositorie.findByPrenomsContains(motCle);
+        List<AdministrateurDTO> administrateurDTOS=administrateurList
+                .stream().map(administrateur -> mapperDTO.fromAdminstrateur(administrateur))
+                .collect(Collectors.toList());
+        return  administrateurDTOS;
     }
 }

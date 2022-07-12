@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @Slf4j
+@CrossOrigin("*")
 public class AdministrateurRestController {
     private AdministrateurService administrateurService;
 
@@ -36,5 +37,17 @@ public class AdministrateurRestController {
     @DeleteMapping("/administrateurs/{id}")
     public void delete(@PathVariable Long id) throws AdministrateurNotFoundException {
         administrateurService.deleteAdministrateur(id);
+    }
+    @PutMapping("/administrateurs/{id}/desactive")
+    public AdministrateurDTO desactive(@PathVariable Long id){
+        return administrateurService.desactiveCompte(id);
+    }
+    @PutMapping("/administrateurs/{id}/active")
+    public AdministrateurDTO active(@PathVariable Long id){
+        return administrateurService.activeCompte(id);
+    }
+    @GetMapping("/administrateurs/recherche")
+    public List<AdministrateurDTO> search(@RequestParam(name = "recherche",defaultValue = "") String nom){
+        return administrateurService.searchAdministrateur(nom);
     }
 }

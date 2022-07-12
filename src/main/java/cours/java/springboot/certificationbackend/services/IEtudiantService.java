@@ -20,4 +20,8 @@ public interface IEtudiantService {
     void deleteEtudiant(Long id) throws EtudiantNotFoundException;
 
     List<DemandeDTO> demandesEtudiants(Long id);
+
+    EtudiantDTO desactiveCompte(Long id);
+
+    EtudiantDTO activeCompte(Long id);
 }

@@ -17,4 +17,9 @@ public interface IAdministrateurService {
     AdministrateurDTO updateAdministrateur(AdministrateurDTO administrateurDTO);
 
     void deleteAdministrateur(Long id) throws AdministrateurNotFoundException;
+
+    AdministrateurDTO desactiveCompte(Long id);
+    AdministrateurDTO activeCompte(Long id);
+
+    List<AdministrateurDTO> searchAdministrateur(String motCle);
 }

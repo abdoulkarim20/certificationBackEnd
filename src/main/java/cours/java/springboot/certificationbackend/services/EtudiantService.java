@@ -4,6 +4,7 @@ import cours.java.springboot.certificationbackend.dtos.DemandeDTO;
 import cours.java.springboot.certificationbackend.dtos.EtudiantDTO;
 import cours.java.springboot.certificationbackend.entities.Demande;
 import cours.java.springboot.certificationbackend.entities.Etudiant;
+import cours.java.springboot.certificationbackend.enums.Etat;
 import cours.java.springboot.certificationbackend.exceptions.EtudiantNotFoundException;
 import cours.java.springboot.certificationbackend.mappers.MapperDTO;
 import cours.java.springboot.certificationbackend.repositories.DemandeRepositorie;
@@ -75,5 +76,23 @@ public class EtudiantService implements IEtudiantService {
         return listeDemande.stream()
                 .map(demande -> mapperDTO.fromDemande(demande))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public EtudiantDTO desactiveCompte(Long id) {
+        Etudiant etudiant=etudiantRepositorie.findById(id).get();
+        EtudiantDTO etudiantDTO=mapperDTO.fromEtudiant(etudiant);
+        etudiant.setEtatCompte(Etat.DESACTIVE);
+        Etudiant etudiantDesactive=etudiantRepositorie.save(etudiant);
+        return etudiantDTO;
+    }
+
+    @Override
+    public EtudiantDTO activeCompte(Long id) {
+        Etudiant etudiant=etudiantRepositorie.findById(id).get();
+        EtudiantDTO etudiantDTO=mapperDTO.fromEtudiant(etudiant);
+        etudiant.setEtatCompte(Etat.ACTIVE);
+        Etudiant etudiantActived=etudiantRepositorie.save(etudiant);
+        return etudiantDTO;
     }
 }
