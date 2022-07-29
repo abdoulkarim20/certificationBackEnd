@@ -63,4 +63,12 @@ public class DemandeService implements IDemandeService {
         Demande demandeValider=demandeRepositorie.save(demande);
         return demandeDTO;
     }
+    @Override
+    public DemandeDTO rejeterDemande(Long id) throws DemandeNotFoundExeception {
+        Demande demande=demandeRepositorie.findById(id).get();
+        DemandeDTO demandeDTO=mapperDTO.fromDemande(demande);
+        demande.setStatutDemande(Statut.Desaprouver);
+        Demande demandeValider=demandeRepositorie.save(demande);
+        return demandeDTO;
+    }
 }

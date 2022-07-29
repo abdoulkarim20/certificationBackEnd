@@ -40,4 +40,8 @@ public class DemandeRestController {
     public DemandeDTO valider(@PathVariable Long id) throws DemandeNotFoundExeception {
         return demandeService.validerDemande(id);
     }
+    @PutMapping("/demandes/rejeter/{id}")
+    public DemandeDTO rejeter(@PathVariable Long id) throws DemandeNotFoundExeception {
+        return demandeService.rejeterDemande(id);
+    }
 }

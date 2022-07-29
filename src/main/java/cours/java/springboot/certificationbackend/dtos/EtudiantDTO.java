@@ -2,16 +2,12 @@ package cours.java.springboot.certificationbackend.dtos;
 import cours.java.springboot.certificationbackend.enums.Etat;
 import cours.java.springboot.certificationbackend.enums.Niveau;
 import lombok.Data;
-
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import java.util.Date;
 @Data
 public class EtudiantDTO {
     private Long Id;
     private String nom;
     private String prenoms;
-    //@Temporal(TemporalType.DATE)
     private Date dateNaissance;
     private String email;
     private String telephone;
@@ -19,7 +15,7 @@ public class EtudiantDTO {
     private ProfileDTO profileDTO;
     private String matricule;
     private Niveau niveauEtude;
-    private String photo;
+    //private String photo;
     private FiliereDTO filiereDTO;
     private String username;
     private String password;

@@ -17,4 +17,6 @@ public interface IDemandeService {
     void deleteDemande(Long id) throws DemandeNotFoundExeception;
 
     DemandeDTO validerDemande(Long id) throws DemandeNotFoundExeception;
+
+    DemandeDTO rejeterDemande(Long id) throws DemandeNotFoundExeception;
 }
