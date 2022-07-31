@@ -17,7 +17,9 @@ public class Demande {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String objet;
+    @Column(columnDefinition="LONGTEXT",length = 2000)
     private String contenu;
+    private String telephone;
     private Date dateDemande;
     @Enumerated(EnumType.STRING)
     private Statut statutDemande;

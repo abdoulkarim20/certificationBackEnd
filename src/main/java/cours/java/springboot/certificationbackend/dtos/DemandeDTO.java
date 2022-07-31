@@ -10,6 +10,7 @@ public class DemandeDTO {
     private Long id;
     private String objet;
     private String contenu;
+    private String telephone;
     private Date dateDemande;
     private Statut statutDemande;
     private EtudiantDTO etudiant;

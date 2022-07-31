@@ -68,7 +68,7 @@ public class DemandeService implements IDemandeService {
         Demande demande=demandeRepositorie.findById(id).get();
         DemandeDTO demandeDTO=mapperDTO.fromDemande(demande);
         demande.setStatutDemande(Statut.Desaprouver);
-        Demande demandeValider=demandeRepositorie.save(demande);
+        Demande demandeRejeter=demandeRepositorie.save(demande);
         return demandeDTO;
     }
 }
